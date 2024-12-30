@@ -1,1 +1,38 @@
+                                      INTRODUCTION
+  1. To the right, you should see a virtual coin and die. Click the button to “Flip Coin and Roll Die” simultaneously. Repeat this a few times to get an intuition for the probability that 
+both the coin comes up tails and the die comes up as a five. Do you have an estimate of this probability? After this lesson, you will know how to calculate it!
+//
+Yep, the probability is 1/12, no need for extra lesson (I know... I am a math genius :))
 
+                                      UNION, INTERSECTION, AND COMPLEMENT
+  2. To the right is an applet that shows two overlapping circles: A and B. The two dropdown menus allow you to choose from different events. Event A can be any of the following:
+- The outcome of a die roll is even
+- The outcome of a die roll is a five
+- The outcome of a die roll is less than or equal to three
+Event B can be any of the following:
+- The outcome of a die roll is odd
+- The outcome of a die roll is anything but five
+- The outcome of a die roll is greater than or equal to two
+Using the applet, find the INTERSECTION and UNION between the following two events:
+    - The outcome of a die roll is less than or equal to three
+//
+INTERSECTION:
+1st Die roll Less than or Equal to 3
+2nd Die roll is not Five
+    - The outcome of a die roll is anything but five
+//
+UNION:
+1st Die roll is Less than or Equal to Three
+2nd Die roll is not Five
+Using the applet, find the COMPLEMENT of the following events:
+    -The outcome of a die roll is greater than or equal to two
+//
+COMPLEMENT:
+1st Die is Five
+2nd Die roll is Odd
+    -The outcome of a die roll is five
+//
+COMPLEMENT:
+1st Die is Even
+2nd Die roll is not Five
+                                      U
