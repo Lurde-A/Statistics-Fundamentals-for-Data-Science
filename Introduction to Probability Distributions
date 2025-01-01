@@ -70,5 +70,40 @@ stats.binom.pmf() method. Then print prob_2.
 prob_2 = stats.binom.pmf(7, 20, 0.5)
 print(prob_2)                                    RESULT: 0.07392883300781268
 
+                                      PROBABILITY MASS FUNCTION OVER A RANGE USING PYTHON
+GIVEN:
+import scipy.stats as stats
+  9. Uncomment prob_1 and set it equal to the probability of observing between 4 to 6 heads from 10 coin flips. Be sure to use stats.binom.pmf(). Be sure to uncomment the print 
+statement below it as well.
+//
+prob_1 = stats.binom.pmf(4, n=10, p=0.5) + stats.binom.pmf(5, n=10, p=0.5) + stats.binom.pmf(6, n=10, p=0.5)
+print(prob_1)                                    RESULT: 0.6562500000000007
+  10. Use the 1 minus the sum of some values of stats.binom.pmf() method to set prob_2 to the probability of observing more than 2 heads from 10 coin flips.
+//
+prob_2 = 1 - (stats.binom.pmf(0, n=10, p=0.5) + stats.binom.pmf(1, n=10, p=0.5) + stats.binom.pmf(2, n=10, p=0.5))
+print(prob_2)                                    RESULT: 0.9453125
+
+                                      USING THE CULMULATIVE DISTRIBUTION FUNCTION IN PYTHON
+  11. Uncomment and assign the variable prob_1 to the probability of observing 3 or fewer heads from 10 fair coin flips using the cumulative distribution function. Then print prob_1.
+Use the binom.cdf() method from the scipy.stats library.
+//
+prob_1 = stats.binom.cdf(3, n=10, p=0.5)
+print(prob_1)                                    RESULT: 0.17187499999999994
+  12. Uncomment and run the given code for the probability mass function below the following comment: # compare to pmf code (checkpoint 2). See how the calculation using the CDF is simpler?
+//
+print(stats.binom.pmf(0, n=10, p=.5) + stats.binom.pmf(1, n=10, p=.5) + stats.binom.pmf(2, n=10, p=.5) + stats.binom.pmf(3, n=10, p=.5))   RESULT: 0.17187499999999994
+  13. Uncomment prob_2 and assign the variable to be the probability of observing more than 5 heads from 10 fair coin flips. Then print prob_2. Use the binom.cdf() method from the 
+scipy.stats library.
+//
+prob_2 = 1 - (stats.binom.cdf(5, n=10, p=0.5))
+print(prob_2)                                    RESULT: 0.3769531250000001
+  14. Assign the object prob_3 the probability of observing between 2 and 5 heads from 10 fair coin flips. Then print prob_3
+//
+prob_3 = stats.binom.cdf(5, n=10, p=0.5) - stats.binom.cdf(1, n=10, p=0.5)
+print(prob_3)                                    RESULT: 0.6123046874999999
+  15. Uncomment and run the code for the probability mass function at the bottom of script.py. See how this calculation is simpler?
+//
+print(stats.binom.pmf(2, n=10, p=.5) + stats.binom.pmf(3, n=10, p=.5) + stats.binom.pmf(4, n=10, p=.5) + stats.binom.pmf(5, n=10, p=.5))   RESULT: 0.6123046875000006
+
 
 
