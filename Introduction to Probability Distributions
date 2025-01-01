@@ -45,7 +45,30 @@ candy = 'discrete'
                                       PROBABILITY MASS FUNCTIONS
                                       CALCULATING PROBABILITIES USING PYTHON
   7. Change the scaffolded code to calculate the probability of observing 3 heads in 10 fair coin flips. Save this probability to prob_1. Update x and n in script.py accordingly.
+GIVEN:
+import scipy.stats as stats
+# value of interest
+# change this
+x = 1
+# sample size
+# change this
+n = 5
+# calculate probability
+prob_1 = stats.binom.pmf(x, n, 0.5)
+print(prob_1)
+## Question 2
+#prob_2 = 
 //
+import scipy.stats as stats
+x = 3
+n = 10
+prob_1 = stats.binom.pmf(x, n, 0.5)
+print(prob_1)                                    RESULT: 0.11718750000000014
+  8. Using the same logic in question 1, calculate prob_2 to be the probability of observing 7 heads out of 20 fair coin flips. However, this time, directly input values into the 
+stats.binom.pmf() method. Then print prob_2.
+//
+prob_2 = stats.binom.pmf(7, 20, 0.5)
+print(prob_2)                                    RESULT: 0.07392883300781268
 
 
 
