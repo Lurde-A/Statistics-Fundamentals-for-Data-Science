@@ -1,2 +1,43 @@
                                       CALCULATING PROBABILITIES OF EXACT VALUES USING THE PROBABILITY MASS FUNCTION
-  1. 
+  1. We are working in a call center, and we expect the average number of calls in our call center between 9am and 10am to be 15 calls. What is the probability that we would see exactly 
+15 calls in that time frame? Uncomment prob_15 and assign this probability to the variable. Use the poisson.pmf() method. Be sure to print prob_15.
+//
+prob_15 = stats.poisson.pmf(15, 15)
+print(prob_15)                                              RESULT: 0.1024358666645339
+  2. What is the probability we would get between 7 and 9 calls? Save this probability to the variable prob_7_to_9 and then print prob_7_to_9. Be sure to use the poisson.pmf() method.
+//
+prob_7_to_9 = stats.poisson.pmf(7, 15) + stats.poisson.pmf(8, 15) + stats.poisson.pmf(9, 15)
+print(prob_7_to_9)                                          RESULT: 0.062221761061894816
+
+                                      CALCULATING PROBABILITIES OF A RANGE USING A CUMULATIVE DENSITY FUNCTINO
+  3. Working at a call center where the average number of calls between 9am and 10am is 15 calls, what is the probability of observing more than 20 calls? Uncomment prob_more_than_20 
+and assign this probability to the variable. Then print prob_more_than_20.
+//
+prob_more_than_20 = 1 - stats.poisson.cdf(20, 15) 
+print(prob_more_than_20)                                    RESULT: 0.08297091003146029
+  4. What is the probability of observing between 17 to 21 calls when the expected number of calls is 15? Uncomment prob_17_to_21 and assign this probability to the variable. 
+Then print prob_17_to_21.
+//
+prob_17_to_21 = stats.poisson.cdf(21, 15) - stats.poisson.cdf(16, 15)
+print(prob_17_to_21)                                        RESULT: 0.2827703929341844
+
+                                      EXPECTATION OF THE POISSON DISTRIBUTION
+GIVEN:
+import scipy.stats as stats
+import codecademylib3
+from histogram_function import histogram_function
+  5. Uncomment rand_vars and set it equal to 1000 random variates from the Poisson distribution with lambda equal to 15.
+  6. Calculate and print the mean rand_vars.
+//
+rand_vars = stats.poisson.rvs(15, size=1000)
+print(rand_vars)
+  7. We have preloaded a function histogram_function() that takes a list of random variables and plots them to a histogram. Using the same rand_vars variable, run the histogram_function 
+function with rand_vars as the argument to produce the histogram of the data.
+//
+rand_vars = stats.poisson.rvs(15, size=1000)
+print(rand_vars)
+histogram_function(rand_vars)
+
+                                      SPREAD OF THE POISSON DISTRIBUTION
+  8. In script.py, a variable called rand_vars_7 contains 5000 random draws from the Poisson distribution with lambda = 7. Calculate and print the variance of rand_vars_7.
+//
