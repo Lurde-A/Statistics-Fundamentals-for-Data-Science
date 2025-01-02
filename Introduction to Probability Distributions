@@ -105,5 +105,11 @@ print(prob_3)                                    RESULT: 0.6123046874999999
 //
 print(stats.binom.pmf(2, n=10, p=.5) + stats.binom.pmf(3, n=10, p=.5) + stats.binom.pmf(4, n=10, p=.5) + stats.binom.pmf(5, n=10, p=.5))   RESULT: 0.6123046875000006
 
-
+                                      PROBABILITY DENSITY FUNCTION
+  16. Following the same Normal(167.64, 8) distribution, assign the variable prob the probability that a randomly chosen woman is less than 175 cm tall. You should use the stats.norm.cdf() 
+method. Be sure to print prob.
+//
+import scipy.stats as stats
+prob = stats.norm.cdf(175, 167.64, 8)
+print(prob)                                    RESULT: 0.8212136203856288
 
