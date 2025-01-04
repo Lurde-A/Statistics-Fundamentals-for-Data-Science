@@ -39,5 +39,92 @@ print(rand_vars)
 histogram_function(rand_vars)
 
                                       SPREAD OF THE POISSON DISTRIBUTION
+GIVEN:
+import scipy.stats as stats
+import numpy as np
+## For checkpoints 1 and 2
+# 5000 draws, lambda = 7
+rand_vars_7 = stats.poisson.rvs(7, size = 5000)
+## For checkpoints 3 and 4
+# 5000 draws, lambda = 17
+rand_vars_17 = stats.poisson.rvs(17, size = 5000)
   8. In script.py, a variable called rand_vars_7 contains 5000 random draws from the Poisson distribution with lambda = 7. Calculate and print the variance of rand_vars_7.
 //
+print(np.var(rand_vars_7))                                  RESULT: 6.8064313599999995
+  9. Calculate and print the minimum value and maximum value of rand_vars_7.
+//
+print(min(rand_vars_7), max(rand_vars_7))                   RESULT: 0 21
+  10. In script.py, a variable called rand_vars_17 contains 5000 random draws from the Poisson distribution with lambda = 17. Calculate and print the variance of rand_vars_17.
+//
+print(np.var(rand_vars_17))                                 RESULT: 17.02928764
+  11. Calculate and print the minimum and maximum values of rand_vars_17. Note that the range of values of rand_vars_17 is wider than rand_vars_7.
+//
+print(min(rand_vars_17), max(rand_vars_17))                 RESULT: 5 35
+
+                                      EXPECTED VALUE OF THE BINOMINAL DISTRIBUTION
+  12. A certain basketball player has an 85% chance of making a given free throw and takes 20 free throws. Uncomment expected_baskets and set it equal to the number of free throws they 
+are expected to make. Then print expected_baskets.
+//
+expected_baskets = 20 * 0.85
+print(expected_baskets)                                     RESULT: 17.0
+  13. Let’s say a student has a 98% chance of arriving early or on time to class. Uncomment the variable called expected_late and set it equal to the expected number of times the student 
+will arrive late to class throughout the 180 school days in a school year. Be sure to print expected_late.
+//
+expected_late = 180 - 180*0.98
+print(expected_late)                                        RESULT: 3.5999999999999943
+
+                                      VARIANCE OF THE BINOMINAL DISTRIBUTION
+  14. A certain basketball player has an 85% chance of making a given free throw. Uncomment variance_baskets and set it equal to the variance of free throws made from 20 shots.
+Then print variance_baskets.
+//
+variance_baskets = 20*0.85*(1-0.85)
+print(variance_baskets)                                     RESULT: 2.5500000000000003
+  15. Let’s say a student has a 98% chance of arriving on time to class. Uncomment variance_late and set it equal to the variance of days the student will arrive late to class throughout 
+the 180 school days in a school year. Then print variance_late.
+//
+variance_late = 180*0.98*(1-0.98)
+print(variance_late)                                        RESULT: 3.528000000000003
+
+                                      PROPERTIES OF EXPECTATION AND VARIANCE
+  16. At the end of the year, your company’s boss decides that the end-of-year bonus will be 8% of each employee’s salary. If the average salary in the company is $75,000, what is 
+the expected value (or average value) of the bonuses? Uncomment expected_bonus and set it equal the expected value of the bonuses. Then print expected_bonus.
+//
+expected_bonus = 75000 * 0.08
+print(expected_bonus)                                        RESULT: 6000.0
+  17. Let’s say that the number of goals a soccer team scores follows the Poisson distribution with lambda equal to four. Uncomment num_goals and set it equal to 100 random draws from 
+games following this Poisson distribution. You can do this using the stats.poisson.rvs() method from the scipy library with lambda equal to four and 100 random draws. Click the hint if 
+you need more guidance.
+//
+num_goals = stats.poisson.rvs(4, size=100)
+  18. Print the variance of num_goals using np.var().
+//
+print(np.var(num_goals))                                     RESULT: 3.7674999999999987
+  19. Someone thinks that the soccer team is being robbed of goals each game and decides that they are going to count each goal from this team as 2 goals. Uncomment num_goals_2 and set 
+it equal to each value of num_goals multiplied by 2. Then calculate and print the variance of num_goals_2 to see that the variance of num_goals_2 is equal to the variance of num_goals 
+times two squared (same as times four).
+//
+num_goals_2 = 2*num_goals
+print(np.var(num_goals_2))                                   RESULT: 15.069999999999995
+
+                                      REVIEW
+  1. You work at ambulance dispatch where the number of calls that come in daily follows the Poisson distribution with lambda equal to 9. There’s a rule that a team can go on no more 
+than 12 calls a day. But how often could this happen? Create a variable calls that is the probability of observing more than 12 calls on a given day. Then print calls.
+//
+calls = 1 - stats.poisson.cdf(12, 9)
+print(calls)                                                 RESULT: 0.1242265708290351
+  2. Let’s say that you have to call in a backup team if you have 10 or more calls in a given day. But you don’t want to have to call in a backup team unless they really will be needed. 
+But what is the probability that they will be called and not needed? Create and print a variable false_backup that is the probability of observing a minimum of 10 calls, but no more 
+than 12. Then print false_backup.
+//
+false_backup = stats.poisson.cdf(12, 9) - stats.poisson.cdf(9, 9)
+print(false_backup)                                          RESULT: 0.2883651848390232
+  3. A certain tennis star has a first-serve rate of 62%. Let’s say they serve 80 times in a given match. What is the expected value of the number of serves they make? Create and print 
+a variable expected_serves that is the number of first-serves they are expected to make.
+//
+expected_serves = 80 * 0.62
+print(expected_serves)                                       RESULT: 49.6
+  4. At the same first-serve rate, what is the variance of this player’s first-serves? Create and print a variable variance_serves that is the variance of the player making their first 
+serve.
+//
+variance_serves = 80 * 0.62 * (1-0.62)
+print(variance_serves)                                       RESULT: 18.848000000000003
