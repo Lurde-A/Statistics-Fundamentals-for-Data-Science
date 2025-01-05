@@ -14,6 +14,7 @@ print(stats.poisson.cdf(4, 7))                              RESULT: 0.1729916078
   4. On the other hand, our boss said that having more than 9 defects on any given day is considered a bad day. Calculate and print the probability of having one of these bad days.
 //
 print(1 - stats.poisson.cdf(9, 7))                          RESULT: 0.16950406276132668
+
                                       DISTRIBUTION IN PRACTICE
   5. You’ve familiarized yourself a little bit about how the Poisson distribution works in theory by calculating different probabilities. But let’s look at what this might look like in 
 practice. Create a variable called year_defects that has 365 random values from the Poisson distribution.
@@ -32,6 +33,34 @@ Done it above
   9. Calculate and print the average number of defects per day from our simulated dataset. How does this compare to the expected average number of defects each day that we know from 
 the given rate parameter of the Poisson distribution?
 //
-print(year_defects.mean())
+print(year_defects.mean())      OR
 print(np.mean(year_defects))                                RESULT: 6.832876712328767
-  10. 
+  10. You’re worried about what the highest amount of defects in a single day might be because that would be a hectic day. Print the maximum value of year_defects.
+// 
+print(max(year_defects))        OR
+print(year_defects.max())                                   RESULT: 15
+  11. Wow, it would probably be super busy if there were that many defects on a single day. Hopefully, it is a rare event! Calculate and print the probability of observing that maximum 
+value or more from the Poisson(7) distribution.
+//
+print(1 - stats.poisson.cdf(15, lam))                       RESULT: 0.0024065803473980463
+
+                                      EXTRA
+  12. Congratulations! At this point, you have now explored the Poisson distribution and even worked with some simulated data. We have a couple of extra tasks if you would like an extra 
+challenge. Feel free to try them out or move onto the next topic! Let’s say we want to know how many defects in a given day would put us in the 90th percentile of the Poisson(7) 
+distribution. One way we could calculate this is by using the following method:
+        stats.poisson.ppf(percentile, lambda) 
+percentile is equal to the desired percentile (a decimal between 0 and 1), and lambda is the lambda parameter of the Poisson distribution. This function is essentially the inverse of 
+the CDF. Use this method to calculate and print the number of defects that would put us in the 90th percentile for a given day. In other words, on 90% of days, we will observe fewer 
+defects than this number.
+//
+print(stats.poisson.ppf(0.9, lam))                          RESULT: 10.0
+  13. Now let’s see what proportion of our simulated dataset year_defects is greater than or equal to the number we calculated in the previous step. By definition of a percentile, 
+we would expect 1 - .90, or about 10% of days to be in this range. To calculate this:
+Count the number of values in the dataset that are greater than or equal to the 90th percentile value.
+Divide this number by the length of the dataset.
+Click the hint if you want to see an example calculation.
+//
+more_than_10 = sum(year_defects >= stats.poisson.ppf(0.9, lam))
+print(more_than_10)                                         RESULT: 61
+proportion = more_than_10/len(year_defects)
+print(proportion)                                           RESULT: 0.16712328767123288
