@@ -34,3 +34,62 @@ plt.show()
   3. Change the sample size to 10. Does the mean change more or less each time you run it with a smaller sample size?
 //
 samp_size = 10
+
+                                      SAMPLING DISTRIBUTIONS
+GIVEN:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import codecademylib3
+population = pd.read_csv("cod_population.csv")
+# Save transaction times to a separate numpy array
+population = population['Cod_Weight']
+sample_size = 50
+sample_means = []
+for i in range(500):
+  # calculate mean here
+  # append here
+  sample_means.append(this_sample_mean)
+sns.histplot(sample_means,stat='density')
+plt.title("Sampling Distribution of the Mean")
+plt.xlabel("Weight (lbs)")
+plt.show()
+  4. Let’s estimate the sampling distribution of the mean using a population of cod fish. As we did with salmon fish, we will pretend we are all-knowing and have captured weight data on 
+every cod fish in the ocean. In the workspace, we’ve loaded in the cod weight data. We’ve set the sample size equal to 50 and created a for loop to take 500 random samples. Inside the 
+for loop, use the function np.mean() to calculate the mean of each sample. Save this to a variable called this_sample_mean. Then, still inside the for loop, append this_sample_mean to 
+the list sample_means and run the simulation.
+//
+for i in range(500):
+  samp = np.random.choice(population, sample_size, replace = False)
+  # calculate mean here
+  this_sample_mean = np.mean(samp)
+  # append here
+  sample_means.append(this_sample_mean)
+
+                                      CENTRAL LIMIT THEOREM
+  5. In order to see the Central Limit Theorem in action, let’s look at another population of fish that is not normally distributed. We have loaded this data on the weight of cod fish into 
+the workspace. Uncomment the three lines underneath ## Checkpoint 1 to see the plot of the distribution of cod fish. Note the distribution.
+//
+sns.histplot(population, stat = 'density' )
+plt.title("Population Distribution")
+plt.show()
+sample_means = []
+# Below is our sample size
+samp_size = 6
+for i in range(500):
+    samp = np.random.choice(population, samp_size, replace = False)
+    this_sample_mean = np.mean(samp)
+    sample_means.append(this_sample_mean)
+  6. Now that we have seen the skewed population distribution, let’s simulate a sampling distribution of the mean. According to the CLT, we will see a normal distribution once the sampling 
+size is large enough. To start, we have set the sample size to 6. Uncomment the five lines at the very bottom, run the code once, and take a look at the sampling distribution. Remember 
+to scroll down to see the second plot.
+//
+plt.clf() # this closes the previous plot
+sns.histplot(sample_means, stat = 'density' )
+plt.title("Sampling Distribution of the Mean")
+plt.xlabel("Weight (lbs)")
+plt.show()
+  7. Now change the sample size to 50 and run the code. Does the estimated sampling distribution look more normal now?
+//
+samp_size = 50
