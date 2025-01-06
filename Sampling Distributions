@@ -93,3 +93,29 @@ plt.show()
   7. Now change the sample size to 50 and run the code. Does the estimated sampling distribution look more normal now?
 //
 samp_size = 50
+                                      CLT CONTINUED
+  8. In the workspace, we’ve set up a simulation of a population that has a mean of 10 and a standard deviation of 10. We’ve set a sample size of 50. According to the CLT, we should 
+have a sampling distribution of the mean that is normally distributed and has a mean that is close to the population mean. Run the code once. Does what you see align with the CLT?
+Make sure to scroll down in the web browser to see the sampling distribution of the mean.
+//
+Yes, it does align with the CLT as sampling distribution mean is close to the population mean.
+  9. Set variable samp_size equal to 6 and run the code. Why do you think the CLT applies here, even with a smaller sample size?
+//
+samp_size = 6. As the population is noramlly distributes the sampling distribution appears normal even with a smaller sample size. And the its mean is still close to the population mean. 
+
+                                      STANDARD ERROR
+  10. In the workspace, you can see a population distribution and a sampling distribution (scroll down to see the sampling distribution). Right now, the sample size is set to 10. Increase 
+the sample size to 50 and note the change in the shape of the sampling distribution. A smaller standard error means that the distribution will be taller & skinnier. Is that the case?
+Remember to scroll down to see the 2nd plot after you hit run.
+//
+samp_size = 50. Yes, that was the case - the distribution is thinner and taller.
+  11. Now increase the standard deviation of the population to 30. This means that the population distribution will have more variation (and will therefore appear wider and flatter). 
+The sampling distribution will also become wider and flatter because the standard error will increase (due to the larger numerator). Does what you see line up with what you expect?
+//
+population_std_dev = 30. Yes, the distribution appears wider and flatter as there is more place for variation.
+
+                                      BIASED ESTIMATORS
+  12. In the workspace, you can see the sampling distribution of the maximum. The mean of the distribution is not equal to the maximum of the population, showing that it is a biased 
+estimator. Let’s look at another example. Edit the function app_statistic() so that it returns the variance using the NumPy function np.var(). (You can change the string as well to 
+update the title of your plots.) Based on the resulting mean of the sampling distribution, would you say that variance is a biased or unbiased estimator?
+//
