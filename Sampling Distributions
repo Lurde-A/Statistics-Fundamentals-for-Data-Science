@@ -119,3 +119,89 @@ population_std_dev = 30. Yes, the distribution appears wider and flatter as ther
 estimator. Let’s look at another example. Edit the function app_statistic() so that it returns the variance using the NumPy function np.var(). (You can change the string as well to 
 update the title of your plots.) Based on the resulting mean of the sampling distribution, would you say that variance is a biased or unbiased estimator?
 //
+app_stat_text = "Variance"
+def app_statistic(x):
+    return np.var(x)
+  13. Change the statistic to mean using the np.mean() NumPy function. Does what you see correspond with what we know about biased and unbiased estimators? Feel free to try out other 
+statistics in the app_statistic() function!
+//
+app_stat_text = "Mean"
+def app_statistic(x):
+    return np.mean(x)      The mean of the sampling distribution is more or less equal to the population mean.
+
+                                      CALCULATING PROBABILITIES
+  14. Let’s calculate the same probability for our cod fish population. We know that cod have an average weight of 36 lbs with a standard deviation of 20. We want to try to fit 25 cod 
+fish into our same crate that can hold up to 750 lbs. Our first step is to calculate the standard error for a sample size of 25. Using the above information, calculate the standard error 
+and assign it to a variable called standard_error.
+//
+std_dev = 20
+samp_size = 25
+standard_error = std_dev / (samp_size**.5)
+  15. Awesome! Now that we have our standard error, we can use the normal CDF to calculate the probability that a sample of 25 fish has a mean weight of 30 lbs. Using the function 
+stats.norm.cdf(), calculate this probability and assign it to a variable cod_cdf.
+//
+std_dev = 20
+samp_size = 25
+standard_error = std_dev / (samp_size**.5)
+mean = 36
+x = 750 / samp_size
+cod_cdf = stats.norm.cdf(x, mean, standard_error)
+print(cod_cdf)                                      RESULT: 0.06680720126885807
+  16. Given the probability you calculated in the last checkpoint, would you recommend trying to carry 25 cod in the crate?
+//
+No. The probability of catching cod fishes with the average weight of 30pounds or less to fit them all in the 750 carrying bag is only ~7%.
+
+                                      REVIEW
+GIVEN:
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+import codecademylib3
+# Set up parameters here:
+x = None
+population_mean = None
+population_std_dev = None
+samp_size = None
+### Below is code to create simulated dataset and calculate Standard Error
+standard_error = population_std_dev / (samp_size**.5)
+this_cdf = round(stats.norm.cdf(x,population_mean,standard_error),3)
+# Create the population
+population = np.random.normal(population_mean, population_std_dev, size = 100000)
+# Simulate the sampling distribution
+sample_means = []
+for i in range(500):
+    samp = np.random.choice(population, samp_size, replace = False)
+    sample_means.append(np.mean(samp))
+mean_sampling_distribution = round(np.mean(sample_means),3)
+std_sampling_distribution = round(np.std(sample_means),3)
+std_error = population_std_dev / (samp_size **0.5)
+sns.histplot(population, stat = 'density')
+plt.title(f"Population Mean: {population_mean} \n Population Std Dev: {population_std_dev} \n Standard Error = {population_std_dev} / sq rt({samp_size}) \n Standard Error = {std_error} ")
+plt.xlabel("")
+plt.show()
+plt.clf()
+# Plot the sampling distribution
+sns.histplot(sample_means, stat = 'density')
+plt.axvline(x,color='r',linestyle='dashed')
+plt.title(f"Sampling Dist Mean: {mean_sampling_distribution} \n Sampling Dist Standard Deviation: {std_sampling_distribution}\n CDF for x={x}: {this_cdf}")
+plt.xlabel("")
+plt.show()
+  1. Let’s say we weigh all their burgers that they cook for dinner on a given night. 64 people order quarter-pounders. What is the probability that the mean will be 0.24 lbs or less?
+Set up the parameters at the top of the code by filling in values for x, population_mean, population_std_dev, and samp_size.
+//
+x = 0.24
+population_mean = 0.25
+population_std_dev = 0.2
+samp_size = 64
+  2. Hit Run. The CDF is printed in the title of the 2nd plot. Take a mental note of the probability of 64 burgers having a mean of 0.24 lbs or less. 
+// 
+Hit.                                RESULT: CDF for x=0.24: 0.345
+  3. Set the sample size in the simulator to 10 and consider the standard error. Has it changed in the direction you expected?
+  4. Let’s say your family went to the restaurant and all 5 of you ordered the burger. What is the probability that you receive burgers with an average weight of 0.24 lbs or less?
+//
+x = 0.24
+population_mean = 0.25
+population_std_dev = 0.2
+samp_size = 10                      RESULT: CDF for x=0.24: 0.437
+
