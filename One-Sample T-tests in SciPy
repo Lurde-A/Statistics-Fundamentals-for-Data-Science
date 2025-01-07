@@ -1,1 +1,92 @@
+                                      INTRODUCTION
+GIVEN:
+import numpy as np
+prices = np.genfromtxt("prices.csv")
+  1. We have provided a small dataset called prices, representing the purchase prices of customers to BuyPie.com in the past day. First, print out prices to the console and examine the 
+numbers. How much variation is there in the purchase prices? Can you estimate the mean by looking at these numbers?
+//
+print(prices)                                    RESULT: [ 978. 1080.  999.  855. 1105.  961.  899. 1061.  880. 1455.  505.  936.
+                                                          1024.  982.  840.  930.  829.  504.  955. 1380. 1361. 1130.  946.  973.
+                                                          1076. 1131.  810.  734. 1275.  867.  962.  865.  709. 1216.  735.  768.
+                                                           757. 1060.  715.  839.  999. 1259. 1194. 1082. 1129. 1255.  931. 1236.
+                                                           921.  907.]
+  2. Calculate the mean of prices using np.mean(). Store it in a variable called prices_mean and print it out. What is the average purchase price for these 50 purchases? Is it a lot less 
+than 1000? Or only a little less?
+//
+prices_mean = np.mean(prices)
+print(prices_mean)                               RESULT: 980.0
 
+                                      IMPLEMENTING A ONE-SAMPLE T-TEST
+GIVEN:
+from scipy.stats import ttest_1samp
+import numpy as np
+prices = np.genfromtxt("prices.csv")
+print(prices)
+prices_mean = np.mean(prices)
+print("mean of prices: " + str(prices_mean))
+  3. Use ttest_1samp() to run the hypothesis test described above (null: the average price is 1000 Rupees; alternative: the average price is not 1000 Rupees). Store the p-value in a 
+variable called pval. Remember that it is the second output of the ttest_1samp() function. We won’t use the first output, the t-statistic, so you can store it in a variable with whatever 
+name you’d like.
+//
+tstat, pval = ttest_1samp(prices, 1000)
+  4. Print out pval to the console. Does the p-value you got make sense, knowing the mean of prices and having inspected the data? (Look at the hint for an answer to this question).
+//
+print(pval)                                       RESULT: 0.4920744804182786
+
+                                      ASSUMPTIONS OF A ONE-SAMPLE T-TEST
+  5. Using plt.hist(), plot a histogram of prices and check whether the values are (approximately) normally distributed. Do you see anything to make you concerned that the assumptions of 
+the test were not met (skew, bi-modality, outliers)?
+//
+plt.hist(prices)
+plt.show(). No clear skewness, bi-modality or outliers appeared. The histogram of the prices data more or less looks normal.
+
+                                      REVIEW
+GIVEN:
+from scipy.stats import ttest_1samp
+import numpy as np
+daily_prices = np.genfromtxt("daily_prices.csv", delimiter=",")
+  1. As a final exercise, some data has been loaded for you with purchase prices for consecutive days at BuyPie. You can access the first day using daily_prices[0], the second using 
+daily_prices[1], etc.. To practice running a one-sample t-test and inspecting the resulting p-value, try the following: Calculate and print out a p-value for day 1 where the null 
+hypothesis is that the average purchase price was 1000 Rupees and the alternative hypothesis is that the average purchase price was not 1000 Rupees. Print out the p-value.
+//
+print(daily_prices[0])                                    RESULT: [1353.  760.  900.  759.  854.  925.  839.  917. 1236.  940. 1253.  859.
+                                                                   873.  814.  909.  718.  835. 1027. 1075.  801.  714.  733. 1137. 1057.
+                                                                   1118. 1025.  858. 1010.  600.  967. 1286. 1072. 1007.  585.  853. 1286.
+                                                                   1531.  685.  764. 1113.  905.  711.  758.  643.  748.  965. 1102. 1239.
+                                                                   1354. 1265. 1046.  995. 1230.  822. 1185. 1183. 1285.  969.  964.  958.
+                                                                   1159. 1123.  739. 1076. 1712. 1241. 1337.  852. 1075. 1274. 1023.  862.
+                                                                    964.  926. 1150. 1124. 1004.  894.  939. 1161. 1028.  793.  677. 1107.
+                                                                   1356. 1284.  775.  955. 1145.  856.  930.  748. 1257. 1019. 1180. 1581.
+                                                                   1246.  998. 1078. 1104.]
+tstat, pval = ttest_1samp(daily_prices[0], 1000)                   
+print('Day 1 p-value is ')                                         Day 1 p-value is 
+print(pval)                                                        0.6071186852381734
+  2. Run the same hypothesis tests for days 1-10 (the fastest way to do this is with a for-loop!) and print out the resulting p-values. What’s the smallest p-value you observe for 
+those 10 days?
+//
+for i in range(10):
+  tstat, pval = ttest_1samp(daily_prices[i], 1000)
+  print('Day '+str(i+1)+' p-value is: ')
+  print(pval)
+  i+=1                                                    RESULT: 
+                                                          Day 1 p-value is: 
+                                                          0.6071186852381734
+                                                          Day 2 p-value is: 
+                                                          0.4093623236367092
+                                                          Day 3 p-value is: 
+                                                          0.6823152912621231
+                                                          Day 4 p-value is: 
+                                                          0.9396281562313855
+                                                          Day 5 p-value is: 
+                                                          0.8434532443692766
+                                                          Day 6 p-value is: 
+                                                          0.018765443076610062
+                                                          Day 7 p-value is: 
+                                                          0.6240646986588566
+                                                          Day 8 p-value is: 
+                                                          0.8594296361029083
+                                                          Day 9 p-value is: 
+                                                          0.774383958509746
+                                                          Day 10 p-value is: 
+                                                          0.6813407662727201
+  3. 
