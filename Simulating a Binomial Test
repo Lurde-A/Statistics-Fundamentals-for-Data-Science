@@ -1,1 +1,23 @@
+                                      INTRODUCTION
+GIVEN:
+import pandas as pd
+import codecademylib3
+monthly_report = pd.read_csv('monthly_report.csv')
+  1. The next few exercises will walk through the process of using a binomial test to analyze data from a hypothetical online company, Live-it-LIVE.com — a website that sells all 
+the necessary props and costumes to recreate iconic movie scenes at home! The data we’ll be working with has been loaded for you in the workspace and saved as an object named monthly_report. 
+Print monthly_report so that you can inspect it in the web browser. Note that the purchase column tells us whether a purchase was made; if so, the item that was purchased is listed in 
+the item column. Feel free to scroll through the data so you can inspect more of the items!
+//
+print(monthly_report.head())                                          RESULT:
+                                                                      timestamp	purchase	item
+                                                                    0	2020-01-17 17:23:06	y	cue cards - love actually
+                                                                    1	2020-01-25 17:09:39	n	nan
+                                                                    2	2020-01-25 05:22:01	n	nan
+                                                                    3	2020-01-18 04:33:40	y	t-rex - jurassic park
+                                                                    4	2020-01-24 17:24:52	n	nan
 
+                                      SUMMARIZING THE SAMPLE
+  2. Each row of the dataset monthly_report represents a single visitor to Live-it-LIVE.com during the month in question. Use .head() to print the first five rows of the data once again 
+and inspect the 'purchase' column. What are the values and how can you tell whether someone made a purchase? Note that this will print in both the output terminal and the web browser, 
+but it will look nicer and be easier to read in the web browser.
+//
