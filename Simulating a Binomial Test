@@ -9,15 +9,31 @@ Print monthly_report so that you can inspect it in the web browser. Note that th
 the item column. Feel free to scroll through the data so you can inspect more of the items!
 //
 print(monthly_report.head())                                          RESULT:
-                                                                      timestamp	purchase	item
-                                                                    0	2020-01-17 17:23:06	y	cue cards - love actually
-                                                                    1	2020-01-25 17:09:39	n	nan
-                                                                    2	2020-01-25 05:22:01	n	nan
-                                                                    3	2020-01-18 04:33:40	y	t-rex - jurassic park
-                                                                    4	2020-01-24 17:24:52	n	nan
+                                                                      timestamp	              purchase	item
+                                                                    0	2020-01-17   17:23:06	  y	        cue cards - love actually
+                                                                    1	2020-01-25   17:09:39	  n	        nan
+                                                                    2	2020-01-25   05:22:01	  n	        nan
+                                                                    3	2020-01-18   04:33:40	  y	        t-rex - jurassic park
+                                                                    4	2020-01-24   17:24:52	  n	        nan
 
                                       SUMMARIZING THE SAMPLE
   2. Each row of the dataset monthly_report represents a single visitor to Live-it-LIVE.com during the month in question. Use .head() to print the first five rows of the data once again 
 and inspect the 'purchase' column. What are the values and how can you tell whether someone made a purchase? Note that this will print in both the output terminal and the web browser, 
 but it will look nicer and be easier to read in the web browser.
 //
+print(monthly_report.head())                                          RESULT:
+                                                                      timestamp	              purchase	item
+                                                                    0	2020-01-17   17:23:06	  y	        cue cards - love actually
+                                                                    1	2020-01-25   17:09:39	  n	        nan
+                                                                    2	2020-01-25   05:22:01	  n	        nan
+                                                                    3	2020-01-18   04:33:40	  y        	t-rex - jurassic park
+                                                                    4	2020-01-24   17:24:52	  n        	nan
+  3. Calculate the sample size and assign it to a variable named sample_size. Print sample_size. How many visitors accessed the website this month?
+//
+sample_size = len(monthly_report)
+print(sample_size)                                                  RESULT: 500
+  4. Calculate the number of visitors who made a purchase this month and save it to a variable named num_purchased. Print num_purchased. How many visitors made a purchase this month?
+Note that this will print to the output terminal, not the web browser.
+//
+num_purchased = np.sum(monthly_report.purchase == 'y')
+print(num_purchased)                                                RESULT: 41
