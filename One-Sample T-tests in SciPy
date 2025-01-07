@@ -89,4 +89,55 @@ for i in range(10):
                                                           0.774383958509746
                                                           Day 10 p-value is: 
                                                           0.6813407662727201
-  3. 
+  3. Try changing the null hypothesis so that the expected population mean that you’re testing against is different from 1000. Try any numbers that you want. How do your p-values change?
+//
+for i in range(10):
+  tstat, pval = ttest_1samp(daily_prices[i], 940)
+  print('Day '+str(i+1)+' p-value is: ')
+  print(pval)
+  i+=1                                                  RESULT:
+                                                        Day 1 p-value is: 
+                                                        0.0015179111309002054
+                                                        Day 2 p-value is: 
+                                                        0.0005717301532822798
+                                                        Day 3 p-value is: 
+                                                        0.0013239466428683407
+                                                        Day 4 p-value is: 
+                                                        0.0063353424331452435
+                                                        Day 5 p-value is: 
+                                                        0.00584896495046988
+                                                        Day 6 p-value is: 
+                                                        4.5173755641120344e-07
+                                                        Day 7 p-value is: 
+                                                        0.0021491221914811385
+                                                        Day 8 p-value is: 
+                                                        0.01966716315019028
+                                                        Day 9 p-value is: 
+                                                        0.0054370452440705075
+                                                        Day 10 p-value is: 
+                                                        0.02950857320955726
+for i in range(10):
+  tstat, pval = ttest_1samp(daily_prices[i], 1040)
+  print('Day '+str(i+1)+' p-value is: ')
+  print(pval)
+  i+=1                                                  RESULT:
+                                                        Day 1 p-value is: 
+                                                        0.191549697624995
+                                                        Day 2 p-value is: 
+                                                        0.32341338611658565
+                                                        Day 3 p-value is: 
+                                                        0.131937045830153
+                                                        Day 4 p-value is: 
+                                                        0.04978554876633126
+                                                        Day 5 p-value is: 
+                                                        0.029543638381541313
+                                                        Day 6 p-value is: 
+                                                        0.7045754616805011
+                                                        Day 7 p-value is: 
+                                                        0.20296820154197165
+                                                        Day 8 p-value is: 
+                                                        0.0635012029414093
+                                                        Day 9 p-value is: 
+                                                        0.019523927618523097
+                                                        Day 10 p-value is: 
+                                                        0.03328076163908901
