@@ -1,1 +1,4 @@
-
+                                      INTRODUCTION TO SIGNIFICANCE THRESHOLD
+  1. Suppose that we ran a hypothesis test and calculated a p-value of .062 (saved as p_value1 in script.py). For a significance level of 0.05, is this p-value significant? 
+Change the value of p_value1_significance in script.py to 'significant' or 'not significant' to indicate your answer.
+//
