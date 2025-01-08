@@ -37,3 +37,114 @@ Note that this will print to the output terminal, not the web browser.
 //
 num_purchased = np.sum(monthly_report.purchase == 'y')
 print(num_purchased)                                                RESULT: 41
+
+                                      SIMULATING RANDOMNESS
+  5. In script.py, use the random.choice() function from NumPy to simulate a single visitor to Live-it-LIVE.com, who has a 10% chance of making a purchase (p=0.1). Save the outcome as 
+a variable named one_visitor and print it. If the visitor made a purchase, the value of one_visitor should be ['y']; if they did not make a purchase, it should be ['n'] (just like in 
+the original data!). Did that one simulated visitor make a purchase? Try pressing “Run” a few more times and see if you ever observe a different outcome. (Note that you’ll see an error 
+for the next checkpoint if you press run a few times; don’t worry about that!).
+//
+one_visitor = np.random.choice(['y', 'n'], size=1, p=[0.1, 0.9])
+print(one_visitor)                                                  RESULT: Most of the time running the script gave ['n']. Happened one time to appear as ['y'].
+  6. Now, create a new list named simulated_monthly_visitors, which contains the randomly-generated outcomes for 500 visitors to Live-it-LIVE.com (still with a 10% chance of a purchase). 
+Print simulated_monthly_visitors out. Do you see any visitors in this list who made a purchase?
+//
+simulated_monthly_visitors = np.random.choice(['y', 'n'], size=500, p=[0.1, 0.9])
+print(simulated_monthly_visitors)                                   RESULT: Small amount, but there are some ['y']-es.
+                                                                    ... 'n' 'n' 'n' 'n' 'n' 'n' 'y' 'n' 'n' 'n' 'n' 'y' 'n' 'n' 'n' 'n' 'n' 'n'
+                                                                    'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'y' 'n'
+                                                                    'n' 'y' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'y' 'n' 'n' 'n' 'n' 'n' 'n'
+                                                                    'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'n' 'y']
+
+                                      SIMULATING THE NULL DISTRIBUTION I
+GIVEN:
+import numpy as np
+import pandas as pd
+monthly_report = pd.read_csv('monthly_report.csv')
+#simulate 500 visitors:
+simulated_monthly_visitors = np.random.choice(['y', 'n'], size=500, p=[0.1, 0.9])
+  7. In script.py, you’ll see the code we used in the previous exercise to generate simulated_monthly_visitors, a list of 500 simulated outcomes, 'y' (with probability 0.1) or 'n', 
+indicating whether each imaginary site visitor made a purchase. Add a line of code to calculate the number of those simulated visitors who made a purchase. Save the result as num_purchased 
+and print it out.
+//
+simulated_monthly_visitors = np.random.choice(['y', 'n'], size=500, p=[0.1, 0.9])
+num_purchased = np.sum(simulated_monthly_visitors == 'y')
+print(num_purchased)                                                RESULT: 57 (Randomnly generted sample example, other times it was 53, 47 and etc.)
+  8. Inspect the value of num_purchased from the previous instruction. Is it close to 50 (which is what we would expect for a purchase probability of 10%)? Less than? Greater than? 
+Now try pressing “Run” a few more times and see what other values of num_purchased you observe. What’s the farthest number from 50 that you observe after pressing “Run” 5 times?
+//
+Pressed.                                                            RESULT: The farthest value was 40. 10 less than an expected value of 50 (as 10% purchase expectation)
+
+                                      SIMULATING THE NULL DISTRIBUTION II
+GIVEN:
+import numpy as np
+import pandas as pd
+null_outcomes = []
+  9. Now let’s ask the same question with regards to purchases: if we run an experiment where we simulate a sample of 500 visitors, each with a 10% chance of making a purchase, and record 
+the number of purchases for that imaginary sample — then repeat that experiment a bunch of times — what are the minimum and maximum number of purchases that we’ll observe by random chance?
+The solution code from the last exercise is already saved for you in script.py commented out. This is the code to randomly sample 500 visitors who each have a 10% chance of making 
+a purchase, then save the actual number who made a purchase as num_purchased. Use a for-loop to repeat this process 10000 times. Each time, append the number of simulated visitors who made 
+a purchase to the list null_outcomes (which has also been initialized for you in script.py).
+//
+for i in range(10000):
+  simulated_monthly_visitors = np.random.choice(['y', 'n'], size=500, p=[0.1, 0.9])
+  num_purchased = np.sum(simulated_monthly_visitors == 'y')
+  null_outcomes.append(num_purchased)
+print(null_outcomes)                                                RESULT: 
+                                                                    ... 63, 52, 43, 44, 47, 47, 44, 67, 36, 55, 43, 38, 42, 62, 50, 33, 53, 
+                                                                    44, 49, 52, 40, 49, 46, 42, 54, 47, 53, 48, 52, 51, 46, 43, 59, 55, 
+                                                                    51, 58, 44, 49, 51, 44, 43, 49, 52, 38, 52, 42, 43, 47, 46, 43, 47, 
+                                                                    46, 50, 56, 40, 42, 46, 36, 46, 48, 38, 57, 40, 48, 49, 36, 46, 44, 
+                                                                    46, 40, 52, 52, 44, 62, 45, 44, 51, 46, 50, 47, 46, 51]
+  10. Outside of your loop, save the minimum and maximum values in null_outcomes as null_min and null_max respectively, then print them out. How much does the number of purchases seem 
+to be varying by random chance? Run your code a couple of times to see how variable these numbers are.
+//
+null_min = np.min(null_outcomes)
+print(null_min)                                                     RESULT: 26
+null_max = np.max(null_outcomes)
+print(null_max)                                                     RESULT: 80
+
+                                      INSPECTING THE NULL DISTRIBUTION
+GIVEN:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import codecademylib3
+null_outcomes = []
+for i in range(10000):
+  simulated_monthly_visitors = np.random.choice(['y', 'n'], size=500, p=[0.1, 0.9])
+  num_purchased = np.sum(simulated_monthly_visitors == 'y')
+  null_outcomes.append(num_purchased)
+#plot the histogram here:
+plt.show()
+  11. The code from the previous exercise is provided for you in script.py. The list null_outcomes contains numbers of purchases simulated under the null hypothesis. Add code to plot 
+a histogram of null_outcomes and inspect the plot. What range of values occurs most frequently? Note that, because we are using simulation, if you press “Run” a few times, the histogram 
+will change slightly each time — but the basic shape and range covered on the x-axis will stay the same.
+//
+plt.hist(null_outcomes)
+  12. In the month we’re investigating, we calculated that there were 41 purchases. Add a vertical line to your histogram at 41. Make this line red using color = 'r' so that you can see it.
+Where does 41 fall in this distribution? Is it relatively likely or unlikely?
+//
+plt.axvline(41, color = 'r')
+plt.show()
+
+                                      CONFICDENCE INTERVALS
+GIVEN:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import codecademylib3
+null_outcomes = []
+for i in range(10000):
+  simulated_monthly_visitors = np.random.choice(['y', 'n'], size=500, p=[0.1, 0.9])
+  num_purchased = np.sum(simulated_monthly_visitors == 'y')
+  null_outcomes.append(num_purchased)
+  13. The code to generate null_outcomes has been provided for you. Calculate an interval covering the middle 90% of the values in null_outcomes. Save the output in a variable named 
+null_90CI and print it out. Is the observed value of 41 purchases inside or outside this interval?
+//
+null_90CI = np.percentile(null_outcomes, [5.0,95.0])
+print(null_90CI)                                                     RESULT: [39. 61.] The observed value of 41 purchase are within 90% of the data of implemented purchases. 
+                                                                     Means it is a very likely amount of purchases to be made.
+
+                                      CALCULATING A ONE-SIDED P-VALUE
+  14. 
