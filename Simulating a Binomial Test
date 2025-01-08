@@ -162,5 +162,127 @@ Alternative: the probability of a purchase rate was LESS THAN 10%
 In other words, calculate the proportion of values in null_outcomes that are less than or equal to 41 (the observed number of purchases that we calculated earlier). Save this number 
 as a variable named p_value and print it out. Try pressing “Run” a few times; You should see slightly different values of p_value each time. What do you think the true probability is?
 //
+null_outcomes = np.array(null_outcomes)
+p_value = np.sum(null_outcomes <= 41)/len(null_outcomes)
+print(p_value)                                                       RESULT: 0.1045
 
+                                      CALCULATING A TWO-SIDED P-VALUE
+GIVEN:
+import numpy as np
+import pandas as pd
+null_outcomes = []
+for i in range(10000):
+  simulated_monthly_visitors = np.random.choice(['y', 'n'], size=500, p=[0.1, 0.9])
+  num_purchased = np.sum(simulated_monthly_visitors == 'y')
+  null_outcomes.append(num_purchased)
+  15. The code you wrote to generate null_outcomes is available to you in script.py. Use null_outcomes to calculate the p-value for a two-sided test (alternative hypothesis is that 
+the purchase probability was DIFFERENT FROM 10%). Remember that, if the purchase rate is 10%, we expect 50 of the 500 visitors to make a purchase. In other words, calculate the proportion 
+of values in null_outcomes that are less than or equal to 41 (the number of purchases we observed in our sample, which is 9 fewer than 50) OR greater than or equal to 59 (which is 
+9 purchases more than 50). Save this number as a variable named p_value and print it out. Again, try pressing run a few times to observe a few different estimates of p_value. What do 
+you think the true p-value is for this test?
+//
+null_outcomes = np.array(null_outcomes)
+p_value = np.sum((null_outcomes <= 41) | (null_outcomes >= 59))/len(null_outcomes)
+print(p_value)                                                       RESULT: 0.2138
 
+                                      WRITING A BINOMIAL TEST FUNCTION
+GIVEN:
+import numpy as np
+import pandas as pd
+from scipy.stats import binom_test
+def simulation_binomial_test():
+  #initialize null_outcomes
+  null_outcomes = []
+  #generate the simulated null distribution
+  for i in range(10000):
+    simulated_monthly_visitors = np.random.choice(['y', 'n'], size=500, p=[.1, .9])
+    num_purchased = np.sum(simulated_monthly_visitors == 'y')
+    null_outcomes.append(num_purchased)
+  #calculate a 1-sided p-value
+  null_outcomes = np.array(null_outcomes)
+  p_value = np.sum(null_outcomes <= 41)/len(null_outcomes) 
+  #return the p-value
+  return p_value
+  16. The simulation_binomial_test() function has been outlined for you in script.py. Add the following parameters to the function (in this order):
+observed_successes (the observed sample statistic, eg., 41 purchases)
+n (the sample size, eg., 500 visitors)
+p (the null probability of success, eg., 0.10)
+//
+"def simulation_binomial_test(observed_successes, n, p):"
+  17. Next, edit the simulation_binomial_test() function to remove all of the hard-coded values (eg., 500, 0.1, 0.9, and 41) so that the proper parameters are used in each calculation.
+//
+def simulation_binomial_test(observed_successes, n, p):
+  #initialize null_outcomes
+  null_outcomes = []
+  #generate the simulated null distribution
+  for i in range(10000):
+    simulated_monthly_visitors = np.random.choice(['y', 'n'], size=n, p=[p, 1-p])
+    num_purchased = np.sum(simulated_monthly_visitors == 'y')
+    null_outcomes.append(num_purchased)
+  #calculate a 1-sided p-value
+  null_outcomes = np.array(null_outcomes)
+  p_value = np.sum(null_outcomes <= observed_successes)/len(null_outcomes)   
+  #return the p-value
+  return p_value
+  18. Uncomment the code at the bottom of script.py to test out your function and compare the results to the SciPy binom_test() function. Do you get similar answers?
+//
+#Test your function below by uncommenting the code below. You should see that your simulation function gives you a very similar answer to the binom_test function from scipy:
+p_value1 = simulation_binomial_test(45, 500, .1)
+print("simulation p-value: ", p_value1)                               RESULT: simulation p-value:  0.2585
+p_value2 = binom_test(45, 500, .1, alternative = 'less')
+print("binom_test p-value: ", p_value2)                               RESULT: binom_test p-value:  0.25468926056232155
+
+                                      BINOMIAL TESTING WITH SciPy
+  19. Use the binom_test function to run the same binomial test that you just simulated: A two-sided test for whether the observed 41 purchases among 500 visitors to Live-it-LIVE.com is 
+far enough from the expected 10% purchase rate to convince you that the purchase rate was different from expectation this week. Save the p-value as p_value_2sided and print it out. 
+Is this p-value similar to what you calculated via simulation (approximately 0.2)?
+//
+p_value_2sided = binom_test(41, n=500, p=0.1)
+print(p_value_2sided)                                                 RESULT: 0.20456397700678308
+  20. Run the same hypothesis test as in step 1, but now as a one-sided test where the alternative hypothesis is that the probability of a visitor making a purchase was less than 10% (0.1).
+Save the p-value as p_value_1sided and print it out. Is this p-value similar to what you calculated via simulation (approximately 0.1)?
+//
+p_value_1sided = binom_test(41, n=500, p=0.1, alternative = 'less')
+print(p_value_1sided)
+
+                                      REVIEW
+GIVEN:
+import numpy as np
+import pandas as pd
+from scipy.stats import binom_test
+def simulation_binomial_test(observed_successes, n, p):
+  #initialize null_outcomes
+  null_outcomes = []  
+  #generate the simulated null distribution
+  for i in range(10000):
+    simulated_monthly_visitors = np.random.choice(['y', 'n'], size=n, p=[p, 1-p])
+    num_purchased = np.sum(simulated_monthly_visitors == 'y')
+    null_outcomes.append(num_purchased)
+  #calculate a 1-sided p-value
+  null_outcomes = np.array(null_outcomes)
+  p_value = np.sum(null_outcomes <= observed_successes)/len(null_outcomes)   
+  #return the p-value
+  return p_value
+  1. As a challenge, see if you can re-write the simulation-based binomial test function so that it has an input named alternative_hypothesis that can be equal to 'less', 'not_equal', 
+or 'greater'. Then change the function so that it performs the appropriate one- or two-sided test for the alternative hypothesis provided. 
+//
+def simulation_binomial_test(observed_successes, n, p, alternative_hypothesis):
+  #initialize null_outcomes
+  null_outcomes = []
+  #generate the simulated null distribution
+  for i in range(10000):
+    simulated_monthly_visitors = np.random.choice(['y', 'n'], size=n, p=[p, 1-p])
+    num_purchased = np.sum(simulated_monthly_visitors == 'y')
+    null_outcomes.append(num_purchased)
+  null_outcomes = np.array(null_outcomes)
+  if alternative_hypothesis == 'less':
+    p_value = np.sum(null_outcomes <= observed_successes)/len(null_outcomes) 
+  elif alternative_hypothesis == 'greater':
+    p_value = np.sum(null_outcomes >= observed_successes)/len(null_outcomes)
+  else:
+    difference = np.abs(p*n - observed_successes)
+    upper = p*n + difference
+    lower = p*n - difference
+    p_value = np.sum((null_outcomes >= upper) | (null_outcomes <= lower))/len(null_outcomes)  
+  #return the p-value
+  return p_value
