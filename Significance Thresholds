@@ -2,3 +2,17 @@
   1. Suppose that we ran a hypothesis test and calculated a p-value of .062 (saved as p_value1 in script.py). For a significance level of 0.05, is this p-value significant? 
 Change the value of p_value1_significance in script.py to 'significant' or 'not significant' to indicate your answer.
 //
+# P-Value for first Hypothesis Test
+p_value1 = .062
+p_value1_significance = 'not significant'
+  2. Now, suppose that we ran another hypothesis test and calculated a p-value of .013 (saved as p_value2 in script.py). For a significance level of 0.05, is this p-value significant? 
+Change the value of p_value2_significance in script.py to 'significant' or 'not significant' to indicate your answer.
+//
+# P-Value for second Hypothesis Test
+p_value2 = 0.013
+p_value2_significance = 'significant'
+
+                                      INTERPRETING A P-VALUE BASED ON SIGNIFICANCE THRESHOLD
+  3. Suppose that we ran the binomial hypothesis test described in this exercise and calculated a p-value of 0.062. Using a significance threshold of 0.05, should we remove the question 
+from our site? Change the value of remove_question_1 to 'yes' or 'no' to indicate your answer.
+//
