@@ -1,1 +1,24 @@
                                       INTRODUCTION TO LINEAR REGRESSION
+GIVEN:
+# Load libraries
+import codecademylib3
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+# Read in the data
+students = pd.read_csv('test_data.csv')
+# Write equation for a line
+y = 9.85 * students.hours_studied + 43
+# Create the plot here: 
+#plt.plot(students.hours_studied, y)
+plt.show()
+  1. A dataset has been loaded for you in script.py containing fictional data from a group of students who were surveyed about their studying and breakfast choices prior to a math test.
+The data is loaded as a variable named students. Create a scatter plot with hours_studied on the x-axis and score on the y-axis. Note that the code to show the plot (plt.show()) is 
+already provided for you, so you do not need to add it!
+//
+  2. If you had to draw a line on top of this plot to describe the relationship between hours studied and math score, what would that line look like? Uncomment the code for the line 
+plot (plt.plot(students.hours_studied, y)). Does this line look correct?
+//
+
+                                      EQUATION OF A LINE
+  3.
