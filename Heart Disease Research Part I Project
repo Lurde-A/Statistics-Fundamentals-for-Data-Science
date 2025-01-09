@@ -61,7 +61,9 @@ print(chol_nhd.head())                                               RESULT:
 print(np.mean(chol_nhd))                                             RESULT: 242.640243902439
 from scipy.stats import ttest_1samp
 tstat, pval2 = ttest_1samp(chol_nhd, 240)
-print(pval2/2)                                                       RESULT: 0.26397120232220506
+print(pval2/2)                                                       RESULT: 0.26397120232220506. As the p-value is much higher than dignificance threshold of 0.05 this indicates that 
+                                                                     investigated sample of people's heart raated with ho heart deseases shows no significant difference from the found 
+                                                                     average heart rate of 240 mg/dl.
   6. 
 
 
