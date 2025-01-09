@@ -12,7 +12,107 @@ Change the value of p_value2_significance in script.py to 'significant' or 'not 
 p_value2 = 0.013
 p_value2_significance = 'significant'
 
-                                      INTERPRETING A P-VALUE BASED ON SIGNIFICANCE THRESHOLD
+                                      INTERPRETING A P-VALUE BASED ON A SIGNIFICANCE THRESHOLD
   3. Suppose that we ran the binomial hypothesis test described in this exercise and calculated a p-value of 0.062. Using a significance threshold of 0.05, should we remove the question 
 from our site? Change the value of remove_question_1 to 'yes' or 'no' to indicate your answer.
 //
+# P-Value for first Hypothesis Test
+p_value1 = .062
+remove_question_1 = 'no'
+  4. We ran the same hypothesis test for a different question and calculated a p-value of 0.013. Again using a significance threshold of 0.05, should we remove this question from our site? 
+Change the value of remove_question_2 to 'yes' or 'no' to indicate your answer.
+//
+# P-Value for second Hypothesis Test
+p_value2 = 0.013
+remove_question_2 = 'yes'
+
+                                      ERROR TYPES
+  5. Suppose that the average score on a standardized test is 50 points. A researcher wants to know whether students who take this test in an ergonomically designed chair score 
+significantly differently from the general population of test-takers. The researcher randomly assigns 100 students to take the test in an ergonomic chair. Then, the researcher runs 
+a hypothesis test with a significance threshold of 0.05 and the following null and alternative hypotheses:
+Null: The mean score for students who take the test in an ergonomic chair is 50 points.
+Alternative: The mean score for students who take the test in an ergonomic chair is not 50 points.
+Suppose that the truth (which the researcher doesn’t know) is: if every student took the test in an ergonomic chair, the average score for all test-takers would be 52 points. Based on their 
+sample of only 100 students, the researcher calculates a p-value of 0.07. In script.py, change the value of outcome to:
+'correct' if the researcher will come to the correct conclusion based on this test
+'type one' if the researcher will make a type I error based on this test
+'type two' if the researcher will make a type II error based on this test
+//
+outcome = 'type two'
+
+                                      SETTING THE TYPE I ERROR RATE
+GIVEN:
+import codecademylib3
+# Import libraries
+import numpy as np
+from scipy.stats import binom_test
+# Initialize num_errors
+false_positives = 0
+# Set significance threshold value
+sig_threshold = 0.05
+# Run binomial tests & record errors
+for i in range(1000):
+    sim_sample = np.random.choice(['correct', 'incorrect'], size=100, p=[0.8, 0.2])
+    num_correct = np.sum(sim_sample == 'correct')
+    p_val = binom_test(num_correct, 100, .7)
+    if p_val < sig_threshold:
+        false_positives += 1
+# Print proportion of type I errors 
+print(false_positives/1000)
+  6. The code from the narrative has been provided for you in script.py with one small change: the code to create sim_sample has been altered so that the simulated learners each have 
+an 80% chance of answering the question correctly. Change the call to binom_test() so that, for each simulated dataset, you’re running a binomial test where the null hypothesis is true. 
+Press “Run”. If you’ve done this correctly, you should see that the proportion of tests resulting in a false positive is close to the significance threshold (0.05).
+//
+# Initialize num_errors
+false_positives = 0
+# Set significance threshold value
+sig_threshold = 0.05
+# Run binomial tests & record errors
+for i in range(1000):
+    sim_sample = np.random.choice(['correct', 'incorrect'], size=100, p=[0.8, 0.2])
+    num_correct = np.sum(sim_sample == 'correct')
+    p_val = binom_test(num_correct, 100, .8)
+    if p_val < sig_threshold:
+        false_positives += 1
+# Print proportion of type I errors 
+print(false_positives/1000)
+  7. Now, change the significance threshold to 0.01 and press “Run”. Note that the proportion of simulations that result in a type I error should now be close to 0.01.
+//
+# Initialize num_errors
+false_positives = 0
+# Set significance threshold value
+sig_threshold = 0.01
+# Run binomial tests & record errors
+for i in range(1000):
+    sim_sample = np.random.choice(['correct', 'incorrect'], size=100, p=[0.8, 0.2])
+    num_correct = np.sum(sim_sample == 'correct')
+    p_val = binom_test(num_correct, 100, .8)
+    if p_val < sig_threshold:
+        false_positives += 1
+# Print proportion of type I errors 
+print(false_positives/1000)
+
+                                      PROBLEMS WITH MULTIPLE HYPOTHESIS TESTS
+  8. In the workspace, code has been provided to create a graph that shows the probability of making at least one type I error among some number of tests with a significance threshold 
+of 0.05. Approximately how many tests would we have to run at a 0.05 significance level so that the probability of at least one type I error would be 50%? Save your answer as 
+the variable num_tests_50percent (note: this can be approximate; it does not need to be exact!)
+//
+# Setting a correct value for num_tests_50percent
+num_tests_50percent = 15
+  9. 
+//
+sig_threshold = 0.10
+num_tests = np.array(range(50))
+probabilities = 1-((1-sig_threshold)**num_tests)
+plt.plot(num_tests, probabilities)
+# Edit title and axis labels
+plt.title('Type I Error Rate for Multiple Tests', fontsize=15)
+# Label the y-axis
+plt.ylabel('Probability of at Least One Type I Error', fontsize=12)
+# Label the x-axis
+plt.xlabel('Number of Tests', fontsize=12)
+# Show the plot                
+plt.show()
+# Setting a correct value for num_tests_50percent
+num_tests_50percent = 8 #more or less ~8. From the grapgh also might look as 7 maybe.
+
