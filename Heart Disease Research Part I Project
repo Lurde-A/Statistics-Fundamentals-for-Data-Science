@@ -64,6 +64,8 @@ tstat, pval2 = ttest_1samp(chol_nhd, 240)
 print(pval2/2)                                                       RESULT: 0.26397120232220506. As the p-value is much higher than significance threshold of 0.05 this indicates that 
                                                                      investigated sample of people's heart rates with ho heart deseases shows no significant difference from the found 
                                                                      average of people heart rate - 240 mg/dl.
+
+                                      FASTING BLOOD SUGAR ANALYSIS
   6. Let’s now return to the full dataset (saved as heart). How many patients are there in this dataset? Save the number of patients as num_patients and print it out.
 //
 num_patients = len(heart)
