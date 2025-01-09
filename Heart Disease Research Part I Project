@@ -66,8 +66,33 @@ print(pval2/2)                                                       RESULT: 0.2
                                                                      average of people heart rate - 240 mg/dl.
   6. Let’s now return to the full dataset (saved as heart). How many patients are there in this dataset? Save the number of patients as num_patients and print it out.
 //
-
-
-
-
-
+num_patients = len(heart)
+print(num_patients)                                                 RESULT: 303
+  7. Remember that the fbs column of this dataset indicates whether or not a patient’s fasting blood sugar was greater than 120 mg/dl (1 means that their fasting blood sugar was greater 
+than 120 mg/dl; 0 means it was less than or equal to 120 mg/dl). Calculate the number of patients with fasting blood sugar greater than 120. Save this number as num_highfbs_patients and 
+print it out.
+//
+num_highfbs_patients2 = sum(heart.fbs == 1.0)
+print(num_highfbs_patients2)                                        RESULT: 45
+#OR
+num_highfbs_patients = np.sum(heart.fbs)
+print(num_highfbs_patients)                                         RESULT: 45.0
+  8. Sometimes, part of an analysis will involve comparing a sample to known population values to see if the sample appears to be representative of the general population. By some estimates, 
+about 8% of the U.S. population had diabetes (diagnosed or undiagnosed) in 1988 when this data was collected. While there are multiple tests that contribute to a diabetes diagnosis, fasting 
+blood sugar levels greater than 120 mg/dl can be indicative of diabetes (or at least, pre-diabetes). If this sample were representative of the population, approximately how many people would 
+you expect to have diabetes? Calculate and print out this number. Is this value similar to the number of patients with a resting blood sugar above 120 mg/dl — or different?
+//
+print(num_patients*0.08)                                            RESULT: 24.240000000000002
+  9. Does this sample come from a population in which the rate of fbs > 120 mg/dl is equal to 8%? Import the function from scipy.stats that you can use to test the following null and 
+alternative hypotheses:
+Null: This sample was drawn from a population where 8% of people have fasting blood sugar > 120 mg/dl
+Alternative: This sample was drawn from a population where more than 8% of people have fasting blood sugar > 120 mg/dl
+//
+from scipy.stats import binom_test
+p_value = binom_test(num_highfbs_patients, num_patients, 0.08, alternative='greater')
+  10. Run the hypothesis test indicated in task 9 and print out the p-value. Using a significance threshold of 0.05, can you conclude that this sample was drawn from a population where 
+the rate of fasting blood sugar > 120 mg/dl is significantly greater than 8%?
+//
+print(p_value)                                                      RESULT: 4.689471951449078e-05. Since the indicated p-value is much less (0.0000468...) than 0.05 threshold it allows 
+                                                                    to understand it is significant and predict that the investigation sample came from the population where more than 8% 
+                                                                    of people have higher blood sugar levels than 120 mg/dl.
