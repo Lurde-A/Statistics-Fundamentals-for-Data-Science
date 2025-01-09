@@ -1,0 +1,18 @@
+                                      CHOLESTEROL ANALYSIS
+  1. The full dataset has been loaded for you as heart, then split into two subsets:
+yes_hd, which contains data for patients with heart disease
+no_hd, which contains data for patients without heart disease
+For this project, we’ll investigate the following variables:
+chol: serum cholestorol in mg/dl
+fbs: An indicator for whether fasting blood sugar is greater than 120 mg/dl (1 = true; 0 = false)
+To start, we’ll investigate cholesterol levels for patients with heart disease. Use the dataset yes_hd to save cholesterol levels for patients with heart disease as a variable named chol_hd.
+//
+print(heart.head())                                                  RESULT:
+                                                                     age     sex  trestbps   chol   ... exang  fbs  thalach  heart_disease
+                                                                  0  63.0    male     145.0  233.0  ...   0.0  1.0    150.0        absence
+                                                                  1  67.0    male     160.0  286.0  ...   1.0  0.0    108.0       presence
+                                                                  2  67.0    male     120.0  229.0  ...   1.0  0.0    129.0       presence
+                                                                  3  37.0    male     130.0  250.0  ...   0.0  0.0    187.0        absence
+                                                                  4  41.0  female     130.0  204.0  ...   0.0  0.0    172.0        absence
+chol_hd = yes_hd.chol
+  2. 
