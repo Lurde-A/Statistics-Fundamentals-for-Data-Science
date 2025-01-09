@@ -40,7 +40,29 @@ Alternative: People with heart disease have an average cholesterol level that is
 Note: Unfortunately, the scipy.stats function we’ve been using does not (at the time of writing) have an alternative parameter to change the alternative hypothesis for this test. 
 Therefore, you’ll have to run a two-sided test. However, since you calculated earlier that the average cholesterol level for heart disease patients is greater than 240 mg/dl, you can 
 calculate the p-value for the one-sided test indicated above simply by dividing the two-sided p-value in half.
+  4. Run the hypothesis test indicated in task 3 and print out the p-value. Can you conclude that heart disease patients have an average cholesterol level significantly greater than 
+240 mg/dl? Use a significance threshold of 0.05.
 //
+from scipy.stats import ttest_1samp
+tstat, pval = ttest_1samp(chol_hd, 240)
+print(pval/2)                                                        RESULT: 0.0035411033905155707. Using significance threshold of 0.05 the indicated p-value (lower than 0.05) reflects 
+                                                                     the significance of the investigated sample meaning the heart desease patents have significantly higher cholesterol 
+                                                                     levels than 240 mg/dl.
+  5. Repeat steps 1-4 in order to run the same hypothesis test, but for patients in the sample who were not diagnosed with heart disease. Do patients without heart disease have average 
+cholesterol levels significantly above 240 mg/dl?
+//
+chol_nhd = no_hd.chol
+print(chol_nhd.head())                                               RESULT:
+                                                                0    233.0
+                                                                3    250.0
+                                                                4    204.0
+                                                                5    236.0
+                                                                7    354.0
+print(np.mean(chol_nhd))                                             RESULT: 242.640243902439
+from scipy.stats import ttest_1samp
+tstat, pval2 = ttest_1samp(chol_nhd, 240)
+print(pval2/2)                                                       RESULT: 0.26397120232220506
+  6. 
 
 
 
