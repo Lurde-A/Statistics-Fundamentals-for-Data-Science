@@ -16,9 +16,26 @@ plt.show()
 The data is loaded as a variable named students. Create a scatter plot with hours_studied on the x-axis and score on the y-axis. Note that the code to show the plot (plt.show()) is 
 already provided for you, so you do not need to add it!
 //
+hours_studied = plt.scatter(students.hours_studied, students.score)
+plt.show()                                                          RESULT: Scattered plot with hours_studied data on the x axis and scores on the y. 
   2. If you had to draw a line on top of this plot to describe the relationship between hours studied and math score, what would that line look like? Uncomment the code for the line 
 plot (plt.plot(students.hours_studied, y)). Does this line look correct?
 //
+# Create the plot here: 
+hours_studied = plt.scatter(students.hours_studied, students.score)
+plt.plot(students.hours_studied, y)
+plt.show()                                                          RESULT: The same scattered plot with a line corresponding to a relationship between studied hours and test scores. 
 
                                       EQUATION OF A LINE
-  3.
+  3. In script.py, we’ve again plotted score (as the y-variable) against hours_studied (the x-variable), with a line going through the points. Let’s see if we can improve this line 
+so that it better fits the data. To start, the line appears to be too steep. In script.py, edit the equation of the line so that the slope is 10, then press “Run” to see the new line.
+This should make the line less steep (because we are decreasing the slope). Does this fit the data better or worse?
+//
+predicted_score = 10 * students.hours_studied + 20                  RESULT: The slope looks much better suited for the scatters in the plot. 
+  4. The line now appears to be parallel to the points but still sits below them! Leaving the slope of the line equal to 10, edit the equation of the line so that the y-intercept 
+is 45, then press “Run” to see the new line. This should move the line upward (because we are increasing the y-intercept). Does this new line fit the data well?
+//
+predicted_score = 10 * students.hours_studied + 45                  RESULT: The line completely corresponds to the scattered plot and visually seen relationship. 
+
+
+
