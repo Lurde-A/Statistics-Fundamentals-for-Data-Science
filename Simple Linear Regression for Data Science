@@ -211,5 +211,34 @@ plt.plot([0,1],[61.66415094339621, 73.7212765957447], color='r')
 # Show the plot
 plt.show()
 
+                                      CATEGORICAL PREDICTORS: FIT AND INTERPRETATION
+GIVEN:
+# Load libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+# Read in the data
+students = pd.read_csv('test_data.csv')
+# Calculate and print group means
+mean_score_no_breakfast = np.mean(students.score[students.breakfast == 0])
+mean_score_breakfast = np.mean(students.score[students.breakfast == 1])
+print('Mean score (no breakfast): ', mean_score_no_breakfast)                      RESULT: Mean score (no breakfast):  61.664150943396216
+print('Mean score (breakfast): ', mean_score_breakfast)                            RESULT: Mean score (breakfast):  73.72127659574468
+  20. The students dataset has been loaded for you in script.py. Create and fit a regression model of score predicted by breakfast using sm.OLS.from_formula() and print out 
+the coefficients.
+//
+model = sm.OLS.from_formula('score ~ breakfast', students)
+results = model.fit()                  
+print(results.params)                                                              RESULT: Intercept    61.664151
+                                                                                           breakfast    12.057126
+                                                                                           dtype: float64
+  21. Code has been provided for you in script.py to calculate the mean test score for students who ate breakfast (saved as mean_score_breakfast) and the mean score for students 
+who did not eat breakfast (saved as mean_score_no_breakfast). Calculate and print the difference in mean scores. Can you find how this number relates to the regression output?
+//
+print(mean_score_breakfast-mean_score_no_breakfast)                                RESULT: 12.057125652348468
+
+                                      REVIEW
+  1. 
 
 
