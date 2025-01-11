@@ -54,7 +54,108 @@ print(body_model_results.params)                                    RESULT: Inte
                                                                             dtype: float64
 
                                       USING A REGRESSION MODEL FOR PREDICTION
-  8. 
+GIVEN:
+# Load libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+# Read in the data
+students = pd.read_csv('test_data.csv')
+print(students.head())                                              RESULT:
+                                                                       score  hours_studied  breakfast
+                                                                    0   73.5            2.7          0
+                                                                    1   92.2            4.1          1
+                                                                    2   55.4            2.5          0
+                                                                    3   64.6            1.6          1
+                                                                    4   66.9            1.4          0
+# Fit the model
+model = sm.OLS.from_formula('score ~ hours_studied', students)
+results = model.fit()
+  8. In script.py, you’ll see the code (from the previous exercise) to fit a model that predicts test score using hours_studied. Print the coefficients of this model using .params.
+//
+print(results.params)                                               RESULT: Intercept        43.016014
+                                                                            hours_studied     9.848111
+                                                                            dtype: float64
+  9. Using your model, what is the predicted score for a student who spent 3 hours studying? Save the result as pred_3hr and print it out. Calculate your answer by plugging into 
+the formula for a line (instead of using .predict()).
+//
+pred_3hr = results.params[1]*3 + results.params[0]
+print(pred_3hr)                                                     RESULT: 72.56034698735526
+  10. What is the predicted score for a student who spent 5 hours studying? Use the .predict() method to calculate your answer and save it as pred_5hr, then print it out.
+//
+newdata = {"hours_studied":[5]}
+pred_5hr = results.predict(newdata)
+print(pred_5hr)                                                     RESULT: 0    92.256569
+
+                                      INTERPRETING A REGRESSION MODEL
+  11. Checkpoint: The intercept for the OLS regression model predicting score based on hours_studied is 43. In interpretations.txt give a one-sentence interpretation of the intercept 
+for this model. Does this intercept make sense in real life? Click Run after you’ve written your interpretation.
+//
+People who didn't study / studied 0 hours for the test would score 43 points.
+  12. The slope for the OLS regression model predicting score based on hours_studied is 9.8. In interpretations.txt give a one-sentence interpretation of the slope for this model.
+Click Run after you’ve written your interpretation.
+//
+One additional studied hour gives the chance of scorig 9.8 points higher.
+
+                                      ASSUMPTIONS ON LINEAR REGRESSION PART I
+GIVEN:
+# Load libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+# Read in the data
+students = pd.read_csv('test_data.csv')
+# Fit the model
+model = sm.OLS.from_formula('score ~ hours_studied', students)
+results = model.fit()
+  13. script.py already contains the code to fit a model on the students dataset that predicts test score using hours_studied as a predictor. Calculate the fitted values for this 
+model and save them as fitted_values.
+//
+fitted_values = results.predict(students)
+print(fitted_values.head())                                           RESULT:
+                                                                      0    69.605914
+                                                                      1    83.393269
+                                                                      2    67.636291
+                                                                      3    58.772991
+                                                                      4    56.803369
+  14. Calculate the residuals for this model and save the result as residuals.
+  15. Print out the first 5 values in residuals and inspect them. Can you make sense of these numbers? What is the difference between a positive and negative residual?
+//
+residuals = students.score - fitted_values
+print(residuals.head())                                               RESULT:
+                                                                      0     3.894086
+                                                                      1     8.806731
+                                                                      2   -12.236291
+                                                                      3     5.827009
+                                                                      4    10.096631
+
+                                      ASSUMPTIONS ON LINEAR REGRESSION PART II
+GIVEN:
+# Load libraries
+import codecademylib3
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+# Read in the data
+students = pd.read_csv('test_data.csv')
+# Fit the model
+model = sm.OLS.from_formula('score ~ hours_studied', students)
+results = model.fit()
+# Calculate fitted values
+fitted_values = results.predict(students)
+# Calculate residuals
+residuals = students.score - fitted_values
+# Plot a histogram of the residuals here:
+plt.show()
+plt.clf()
+# Plot the residuals against the fitted vals here:
+plt.show()
+  16. Your code to calculate the residuals and fitted values for the model of score predicted by hours studied is provided for you in script.py. Plot a histogram of the residuals 
+to check the normality assumption. Is this assumption met?
+//
 
 
 
