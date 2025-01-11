@@ -38,8 +38,23 @@ is 45, then press “Run” to see the new line. This should move the line upwar
 predicted_score = 10 * students.hours_studied + 45                  RESULT: The line completely corresponds to the scattered plot and visually seen relationship. 
 
                                       FITTING A LINEAR REGRESSION MODEL IN PYTHON
+GIVEN:
+# Load libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+# Read in the data
+students = pd.read_csv('test_data.csv')
   5. Using the students dataset that has been loaded in script.py, create a linear regression model that predicts student score using hours_studied as a predictor and save the result 
 as a variable named model.
+print(students.head())                                              RESULT:
+                                                                       score  hours_studied  breakfast
+                                                                    0   73.5            2.7          0
+                                                                    1   92.2            4.1          1
+                                                                    2   55.4            2.5          0
+                                                                    3   64.6            1.6          1
+                                                                    4   66.9            1.4          0
 //
 # Create the model here:
 model = sm.OLS.from_formula('score ~ hours_studied', data = students)
