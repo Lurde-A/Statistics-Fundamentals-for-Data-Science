@@ -239,6 +239,94 @@ who did not eat breakfast (saved as mean_score_no_breakfast). Calculate and prin
 print(mean_score_breakfast-mean_score_no_breakfast)                                RESULT: 12.057125652348468
 
                                       REVIEW
-  1. 
-
-
+GIVEN:
+# Load libraries
+import codecademylib3
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import statsmodels.api as sm
+# Read in the data
+website = pd.read_csv('website.csv')
+# Print the first five rows
+print(website.head())                                                               RESULT:
+                                                                                  	time_seconds	age	    browser
+                                                                                  0	486.0	        47.1	  Safari
+                                                                                  1	645.7	        64.6	  Chrome
+                                                                                  2	345.0        	45.4	  Safari
+                                                                                  3	413.4	        34.4	  Chrome
+                                                                                  4	426.4	        31.3	  Safari
+  1. Create a plot of time_seconds (vertical axis) versus age (horizontal axis). Is there a linear relationship between these variables?
+//
+plt.scatter(website.age, website.time_seconds)
+plt.show()
+plt.clf()          Looking at the plot linear relaptionship can be identified. 
+  2. Fit a linear model to predict time_seconds using the age variable
+//
+model = sm.OLS.from_formula('time_seconds ~ age', data = website)
+results = model.fit()
+print(results.params)                                                               RESULT: 
+                                                                                    Intercept	 128.96794504809196
+                                                                                    age	       6.913757597108946
+  3. Use the coefficients from the linear model to plot the regression line on top of your original plot.
+//
+predicted_time_seconds = 6.913757597108946*website.age + 128.96794504809196
+plt.scatter(website.age, website.time_seconds)
+plt.plot(website.age, predicted_time_seconds)
+plt.show()
+plt.clf()
+#OR
+plt.scatter(website.age, website.time_seconds)
+plt.plot(website.age, results.params[0]+results.params[1]*website.age)
+plt.show()
+plt.clf()
+  4. Calculate the fitted values and residuals.
+//
+fitted_values = results.predict(website)
+print(fitted_values.head())                                                         RESULT: 
+                                                                                 0	454.6059278719233
+                                                                                 1	575.5966858213299
+                                                                                 2	442.8525399568381
+                                                                                 3	366.8012063886397
+                                                                                 4	345.368557837602
+  5. Check the normality assumption by plotting a histogram of the residuals. Are they approximately normally distributed?
+//
+residuals = website.time_seconds - fitted_values
+print(residuals.head())                                                             RESULT: 
+                                                                                 0	31.394072128076687
+                                                                                 1	70.10331417867019
+                                                                                 2	-97.85253995683809
+                                                                                 3	46.59879361136029
+                                                                                 4	81.03144216239798
+# Check normality assumption
+plt.hist(residuals)
+plt.show()
+plt.clf()   The histogram looks noramlly distributed. 
+  6. Check the homoscedasticity assumption by plotting a the residuals against the fitted values. Is this assumption satisfied?
+//
+plt.scatter(fitted_values, residuals)
+plt.show()
+plt.clf()   The scattering is normal, heterogenous around the 0 on both x axis - around the 0 of fitted values. 
+  7. Use your model to predict the amount of time that a 40 year old person will spend on the website.
+//
+prediction = results.params[1]*40 + results.params[0]
+print('The 40-year old person most likely spend '+ str(prediction)+' seconds of time on the website.')
+                                                                                     RESULT: 
+                                                                                     "The 40-year old person most likely spend 405.5182489324498 seconds of time on the website."
+  8. Fit another model that predicts time_seconds based on browser.
+//
+model2 = sm.OLS.from_formula('time_seconds ~ browser', data = website)
+results2 = model2.fit()
+print(results2.params)                                                               RESULT: 
+                                                                                     Intercept	        489.70425531914896
+                                                                                     browser[T.Safari]	-99.05708550782819
+  9.
+//
+Safari_spent_time = np.mean(website.time_seconds[website.browser == 'Safari'])
+Chrome_spent_time = np.mean(website.time_seconds[website.browser == 'Chrome'])
+print("People using Safari spent these seconds on the website: " + str(Safari_spent_time))
+                                                                                     RESULT:
+                                                                                     "People using Safari spent these seconds on the website: 390.64716981132074"
+print("People using Chrome spent these seconds on the website: " + str(Chrome_spent_time))
+                                                                                     RESULT:
+                                                                                     "People using Chrome spent these seconds on the website: 489.70425531914884"
