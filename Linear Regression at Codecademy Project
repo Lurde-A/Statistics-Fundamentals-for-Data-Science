@@ -1,0 +1,80 @@
+                                      LINEAR REGRESSION 
+GIVEN:
+# Load libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.api as sm
+import codecademylib3
+# Read in the data
+codecademy = pd.read_csv('codecademy.csv')
+
+                                      INSPECT THE DATA
+  1. A dataset has been loaded for you in script.py and saved as a dataframe named codecademy. We’re imagining that this data was collected as part of an experiment to understand 
+factors that contribute to learner performance on a quiz. The data contains three columns:
+score: student score on a quiz
+completed: the number of other content items on Codecademy that the learner has completed prior to this quiz
+lesson: indicates which lesson the learner took directly before the quiz ('Lesson A' or 'Lesson B')
+Take a look at this dataset by printing the first five rows.
+//
+print(codecademy.head())                                      RESULT:
+                                                              	score	completed	lesson
+                                                              0	82.7	35.0	    Lesson A
+                                                              1	65.2	31.0	    Lesson A
+                                                              2	55.3	33.0	    Lesson A
+                                                              3	28.8	25.0	    Lesson B
+                                                              4	31.2	18.0	    Lesson B
+
+                                      MODEL THE RELATIONSHIP BETWEEN QUIZ SCORE AND NUMBER OF COMPLETED CONTENT ITEMS
+  2. Plot a scatter plot of score (y-axis) against completed (x-axis) to see the relationship between quiz score and number of completed content items. Make sure to show, then clear 
+the plot. Is there a relationship between these two variables, and does it appear to be linear?
+//
+plt.scatter(codecademy.completed, codecademy.score)
+plt.show()
+plt.clf()
+  3. Create and fit a linear regression model that predicts score using completed as the predictor. Print out the regression coefficients.
+//
+model = sm.OLS.from_formula('score~completed', data=codecademy)
+results = model.fit()
+print(results.params)                                          RESULT:
+                                                               Intercept	13.21411302117958
+                                                               completed	1.306825592807168
+  4. Write a one-sentence (each) interpretation of the slope and intercept that you printed out in the previous step. Make sure to comment out the interpretation so your code still runs.
+//
+# Intercept interpretation:
+# With no other completed content items prior to the quiz the learner would score 13.214113 on it.
+# Slope interpretation:
+# With each additional completed content item the learner would score ~1.31 higher on the quiz.
+  5. Plot the same scatter plot that you made earlier (with score on the y-axis and completed on the x-axis), but this time add the regression line on top of the plot. Make sure 
+to show, then clear the plot. Do you think this line fits the data well?
+//
+plt.scatter(codecademy.completed, codecademy.score)
+plt.plot(codecademy.completed, results.params[0]+results.params[1]*codecademy.completed)
+plt.show()
+plt.clf()
+  6. Use your model to calculate the predicted quiz score for a learner who has previously completed 20 other content items.
+//
+predicted_score = results.params[0] + results.params[1]*20
+print(predicted_score)                                        RESULT: 39.350624877322936
+  7. Calculate the fitted values for your model and save them as fitted_values.
+//
+fitted_values = results.predict(codecademy)
+print(fitted_values.head())                                   RESULT:
+                                                              0	58.953008769430454
+                                                              1	53.72570639820179
+                                                              2	56.33935758381612
+                                                              3	45.884752841358775
+                                                              4	36.736973691708606
+  8. Calculate the residuals for the model and save the result as residuals.
+//
+residuals = codecademy.score - fitted_values
+print(residuals.head())                                       RESULT:
+                                                              0	23.74699123056955
+                                                              1	11.474293601798216
+                                                              2	-1.0393575838161198
+                                                              3	-17.084752841358775
+                                                              4	-5.5369736917086065
+  9. Check the normality assumption for linear regression by plotting a histogram of the residuals. Make sure to show and clear the plot. Do the residuals appear to be approximately 
+normally distributed?
+//
